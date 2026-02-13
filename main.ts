@@ -1,11 +1,13 @@
-function funcaoConfuso (num: number) {
+function funcaoConfuso(num: number) {
     if (confuso == 0) {
         basic.showIcon(IconNames.Happy)
     } else {
         basic.showIcon(IconNames.Confused)
     }
+    
 }
-function notifica (texto: string, num2: number) {
+
+function notifica(texto: string, num2: number) {
     if (texto == "ambAula") {
         if (num2 == 1) {
             for (let index = 0; index < 4; index++) {
@@ -14,14 +16,15 @@ function notifica (texto: string, num2: number) {
                 music.play(music.tonePlayable(330, music.beat(BeatFraction.Quarter)), music.PlaybackMode.UntilDone)
             }
         } else {
-            for (let index = 0; index < 4; index++) {
+            for (let index2 = 0; index2 < 4; index2++) {
                 basic.showIcon(IconNames.Yes)
                 basic.clearScreen()
             }
         }
+        
     } else if (texto == "alunoAlt") {
         if (num2 == aluno) {
-            for (let index = 0; index < 4; index++) {
+            for (let index3 = 0; index3 < 4; index3++) {
                 basic.showLeds(`
                     . . # . .
                     . # # # .
@@ -39,19 +42,24 @@ function notifica (texto: string, num2: number) {
                     `)
             }
         }
+        
     }
+    
 }
-input.onButtonPressed(Button.A, function () {
+
+input.onButtonPressed(Button.A, function on_button_pressed_a() {
+    
     confuso = 1
     radio.sendValue("A", aluno)
     basic.showIcon(IconNames.Confused)
 })
-input.onButtonPressed(Button.B, function () {
+input.onButtonPressed(Button.B, function on_button_pressed_b() {
+    
     confuso = 0
     radio.sendValue("B", aluno)
     basic.showIcon(IconNames.Happy)
 })
-radio.onReceivedValue(function (name, value) {
+radio.onReceivedValue(function on_received_value(name: string, value: number) {
     notifica(name, value)
     funcaoConfuso(confuso)
 })
